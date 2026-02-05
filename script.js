@@ -1,126 +1,141 @@
-/* ======================
-   SWITCH LOGIN / REGISTER
-====================== */
+/* =====================================================
+   LOGIN / REGISTER TOGGLE
+===================================================== */
 function showRegister() {
-  loginBox.style.display = "none";
-  registerBox.style.display = "block";
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("registerBox").style.display = "block";
 }
 
 function showLogin() {
-  registerBox.style.display = "none";
-  loginBox.style.display = "block";
+  document.getElementById("registerBox").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
 }
 
-/* ======================
-   REGISTER
-====================== */
+/* =====================================================
+   REGISTER USER
+===================================================== */
 function register() {
-  const user = regUser.value.trim();
-  const pass = regPass.value.trim();
+  const user = document.getElementById("regUser").value.trim();
+  const pass = document.getElementById("regPass").value.trim();
+  const error = document.getElementById("registerError");
 
   if (!user || !pass) {
-    registerError.textContent = "All fields required";
-    registerError.style.color = "tomato";
+    error.textContent = "All fields are required";
+    error.style.color = "tomato";
     return;
   }
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
   if (users.find(u => u.username === user)) {
-    registerError.textContent = "User already exists";
-    registerError.style.color = "tomato";
+    error.textContent = "User already exists";
+    error.style.color = "tomato";
     return;
   }
 
   users.push({ username: user, password: pass });
   localStorage.setItem("users", JSON.stringify(users));
 
-  registerError.textContent = "Registered successfully ✔";
-  registerError.style.color = "lightgreen";
+  error.textContent = "Registered successfully ✔";
+  error.style.color = "lightgreen";
 
   setTimeout(showLogin, 1200);
 }
 
-/* ======================
-   LOGIN
-====================== */
+/* =====================================================
+   LOGIN USER
+===================================================== */
 function login() {
-  const user = loginUser.value.trim();
-  const pass = loginPass.value.trim();
+  const user = document.getElementById("loginUser").value.trim();
+  const pass = document.getElementById("loginPass").value.trim();
+  const error = document.getElementById("loginError");
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
-  const valid = users.find(
+
+  const validUser = users.find(
     u => u.username === user && u.password === pass
   );
 
-  if (valid) {
+  if (validUser) {
     localStorage.setItem("auth", user);
     window.location.href = "./dashboard.html";
   } else {
-    loginError.textContent = "Invalid credentials";
-    loginError.style.color = "tomato";
+    error.textContent = "Invalid username or password";
+    error.style.color = "tomato";
   }
 }
 
-/* ======================
-   AUTH GUARD
-====================== */
-if (location.pathname.includes("dashboard")) {
+/* =====================================================
+   AUTH PROTECTION (DASHBOARD)
+===================================================== */
+if (window.location.pathname.includes("dashboard")) {
   if (!localStorage.getItem("auth")) {
-    window.location.href = "./login.html";
+    window.location.href = "./index.html";
   }
 }
 
-/* ======================
+/* =====================================================
    LOGOUT
-====================== */
+===================================================== */
 function logout() {
   localStorage.removeItem("auth");
-  window.location.href = "./login.html";
+  window.location.href = "./index.html";
 }
 
-/* ======================
-   SIDEBAR
-====================== */
+/* =====================================================
+   SIDEBAR TOGGLE (MOBILE)
+===================================================== */
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
+
+  if (!sidebar) return;
+
   if (window.innerWidth < 768) {
     sidebar.style.display =
       sidebar.style.display === "block" ? "none" : "block";
   }
 }
 
-/* ======================
-   THEME
-====================== */
+/* =====================================================
+   THEME TOGGLE
+===================================================== */
 function toggleTheme() {
   document.body.classList.toggle("light");
 }
 
-/* ======================
-   LINE CHART
-====================== */
-const revenue = [12000, 14500, 16000, 18500, 21000, 24300];
+/* =====================================================
+   LINE CHART (REALISTIC DATA)
+===================================================== */
+const revenueData = [12000, 14500, 16000, 18500, 21000, 24300];
 
 if (document.getElementById("lineChart")) {
   new Chart(document.getElementById("lineChart"), {
     type: "line",
     data: {
-      labels: ["Jan","Feb","Mar","Apr","May","Jun"],
-      datasets: [{
-        label: "Revenue ($)",
-        data: revenue,
-        borderColor: "#38bdf8",
-        backgroundColor: "rgba(56,189,248,0.3)",
-        fill: true,
-        tension: 0.4
-      }]
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      datasets: [
+        {
+          label: "Revenue ($)",
+          data: revenueData,
+          borderColor: "#38bdf8",
+          backgroundColor: "rgba(56,189,248,0.3)",
+          fill: true,
+          tension: 0.4
+        }
+      ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: true }
+        legend: {
+          display: true
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
     }
   });
