@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* ======================
+   VARIABLES
+====================== */
+:root {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.15);
+  --accent: linear-gradient(135deg,#38bdf8,#818cf8);
+}
+
+.light {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --glass: rgba(0,0,0,0.05);
+  --border: rgba(0,0,0,0.1);
+}
+
+/* ======================
+   RESET
+====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ======================
+   CENTER LOGIN
+====================== */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ======================
+   GLASS
+====================== */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+/* ======================
+   LOGIN / REGISTER
+====================== */
+.login-card {
+  width: 92%;
+  max-width: 340px;
+  padding: 30px;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.switch {
+  margin-top: 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.switch:hover {
+  text-decoration: underline;
+}
+
+small {
+  display: block;
+  margin-top: 10px;
+}
+
+/* ======================
+   DASHBOARD LAYOUT
+====================== */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+/* ======================
+   SIDEBAR
+====================== */
+.sidebar {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 230px;
+  padding: 25px;
+  z-index: 1000;
+}
+
+.sidebar h2 {
+  margin-bottom: 25px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+/* ======================
+   TOPBAR
+====================== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 999;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ======================
+   CARDS
+====================== */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+/* ======================
+   CHART
+====================== */
+.chart {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  height: 300px;
+}
+
+.chart canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ======================
+   TABLET
+====================== */
+@media (min-width: 768px) {
+  .dashboard {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .sidebar {
+    display: block;
+    position: relative;
+    height: auto;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chart {
+    height: 360px;
+  }
+}
+
+/* ======================
+   DESKTOP
+====================== */
+@media (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .chart {
+    max-width: 900px;
+    height: 400px;
+  }
+}

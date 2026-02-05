@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login / Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="center">
+
+  <div class="login-card glass">
+
+    <!-- LOGIN -->
+    <div id="loginBox">
+      <h2>Candidate Login</h2>
+      <input id="loginUser" placeholder="Username">
+      <input id="loginPass" type="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <p class="switch" onclick="showRegister()">New candidate? Register</p>
+      <small id="loginError"></small>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerBox" style="display:none">
+      <h2>Register</h2>
+      <input id="regUser" placeholder="Username">
+      <input id="regPass" type="password" placeholder="Password">
+      <button onclick="register()">Register</button>
+      <p class="switch" onclick="showLogin()">Already have account? Login</p>
+      <small id="registerError"></small>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

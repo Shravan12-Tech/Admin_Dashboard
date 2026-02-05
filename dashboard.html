@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar glass" id="sidebar">
+    <h2>Admin</h2>
+    <a>Dashboard</a>
+    <a>Analytics</a>
+    <a>Users</a>
+    <a onclick="logout()">Logout</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <header class="topbar">
+      <button onclick="toggleSidebar()">☰</button>
+      <button onclick="toggleTheme()">🌓</button>
+    </header>
+
+    <!-- STATS -->
+    <section class="cards">
+      <div class="card glass">Users<br><b>1,245</b></div>
+      <div class="card glass">Revenue<br><b>$24,300</b></div>
+      <div class="card glass">Orders<br><b>680</b></div>
+    </section>
+
+    <!-- LINE CHART -->
+    <section class="chart glass">
+      <h3>Monthly Revenue</h3>
+      <canvas id="lineChart"></canvas>
+    </section>
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
